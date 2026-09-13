@@ -298,8 +298,6 @@
     <string name="summary_license">Free software with no warranty. You may redistribute and modify it under the GNU GPL v3.</string>
     <string name="title_legal_notices">Notices and third-party components</string>
 
-    <string name="title_pref_promotion">تبلیغات</string>
-
     <string name="title_pref_auto_update_subscription">ورۊ کردن خوتکار اشتراکا</string>
     <string name="summary_pref_auto_update_subscription">اشتراکا خوتووݩ ن و تۉر خوتکار وا فاصله زمۊوی من پس زمینه ورۊ کۊنین. ای ویژیی من پوی دسگایل گاشڌ همیشه کار نکونه</string>
     <string name="title_pref_auto_update_interval">فاصله ورۊ کردن خوتکار (اقلن وا 15 دؽقه بۊ)</string>

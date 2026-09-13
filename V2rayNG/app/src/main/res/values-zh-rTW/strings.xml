@@ -294,8 +294,6 @@
     <string name="summary_license">自由軟體，不提供任何擔保。您可以依據 GNU GPL v3 再散布及修改本軟體。</string>
     <string name="title_legal_notices">聲明與第三方元件</string>
 
-    <string name="title_pref_promotion">推廣</string>
-
     <string name="title_pref_auto_update_subscription">自動更新訂閱</string>
     <string name="summary_pref_auto_update_subscription">在背景依指定間隔自動更新訂閱。此功能可能因裝置而無法穩定運作。</string>
     <string name="title_pref_auto_update_interval">自動更新間隔（分鐘，最小值 15）</string>

@@ -294,8 +294,6 @@
     <string name="summary_license">Free software with no warranty. You may redistribute and modify it under the GNU GPL v3.</string>
     <string name="title_legal_notices">Notices and third-party components</string>
 
-    <string name="title_pref_promotion">Promotion</string>
-
     <string name="title_pref_auto_update_subscription">Automatically update subscriptions</string>
     <string name="summary_pref_auto_update_subscription">Update your subscriptions automatically at set intervals in the background. Depending on the device, this feature may not always work</string>
     <string name="title_pref_auto_update_interval">Automatic update interval (minutes; minimum 15)</string>

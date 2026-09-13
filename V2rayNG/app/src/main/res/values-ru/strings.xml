@@ -294,8 +294,6 @@
     <string name="summary_license">Свободная программа без каких-либо гарантий. Её можно распространять и изменять на условиях GNU GPL v3.</string>
     <string name="title_legal_notices">Уведомления и сторонние компоненты</string>
 
-    <string name="title_pref_promotion">Предложения</string>
-
     <string name="title_pref_auto_update_subscription">Автоматически обновлять подписки</string>
     <string name="summary_pref_auto_update_subscription">Автоматическое обновление подписок в фоновом режиме с указанным интервалом. В зависимости от устройства эта функция может работать не всегда.</string>
     <string name="title_pref_auto_update_interval">Интервал автообновления (минут, не менее 15)</string>

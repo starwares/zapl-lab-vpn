@@ -85,6 +85,9 @@ android {
         // release channel read by the in-app update check.
         buildConfigField("String", "SOURCE_REPOSITORY", "\"starwares/zapl-lab-vpn\"")
         buildConfigField("String", "SOURCE_COMMIT", "\"$sourceCommit\"")
+        // In-app update check against the releases of SOURCE_REPOSITORY. Off until that release
+        // channel is published; store builds must keep it off (store update policies).
+        buildConfigField("boolean", "UPDATE_CHECK_ENABLED", "false")
 
         val abiFilterList = (properties["ABI_FILTERS"] as? String)?.split(';')
         splits {

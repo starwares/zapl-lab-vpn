@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.v2ray.ang.BuildConfig
 import com.v2ray.ang.R
 import com.v2ray.ang.ui.compose.AppDivider
 import com.v2ray.ang.ui.compose.verticalScrollbar
@@ -50,9 +51,9 @@ private val primaryDrawerItems = listOf(
     MainDestination.Settings
 )
 
-private val drawerItems = primaryDrawerItems + listOf(
+private val drawerItems = primaryDrawerItems + listOfNotNull(
     MainDestination.Logcat,
-    MainDestination.CheckUpdate,
+    MainDestination.CheckUpdate.takeIf { BuildConfig.UPDATE_CHECK_ENABLED },
     MainDestination.BackupRestore,
     MainDestination.About
 )

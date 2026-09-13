@@ -66,6 +66,7 @@ import sh.calvin.reorderable.ReorderableCollectionItemScope
 fun AppTopBar(
     title: String,
     onBackClick: () -> Unit,
+    subtitle: String? = null,
     isLoading: Boolean = false,
     isSearchActive: Boolean = false,
     searchQuery: String = "",
@@ -84,8 +85,17 @@ fun AppTopBar(
                         onQueryChange = onSearchQueryChange,
                         placeholder = searchPlaceholder
                     )
-                } else {
+                } else if (subtitle == null) {
                     Text(text = title)
+                } else {
+                    Column {
+                        Text(text = title)
+                        Text(
+                            text = subtitle,
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                 }
             },
             navigationIcon = {

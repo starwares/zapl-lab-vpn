@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Android 12+ always shows a system splash when the app starts; these attributes replace the
+        default launcher-icon splash with the Zapl Lab mark. Older versions show no splash, as before.
+        Both day and night need this file because values-night outranks values-v31.
+    -->
+    <style name="AppThemeDayNight.NoActionBar" parent="AppThemeBase">
+        <item name="android:windowSplashScreenBackground">@color/splash_background_zapl_lab</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_splash_zapl_lab</item>
+    </style>
+</resources>

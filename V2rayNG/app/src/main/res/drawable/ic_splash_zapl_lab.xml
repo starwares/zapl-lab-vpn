@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Zapl Lab splash mark: the v2rayNG "V", a small "ZAPL" with the brand spark and a smaller "LAB".
+     Generated with the launcher icon geometry; keep the paths in sync. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="288dp"
+    android:height="288dp"
+    android:viewportWidth="288"
+    android:viewportHeight="288"
+    tools:ignore="VectorRaster">
+    <!-- 288dp is the size the Android 12 splash screen requires for an icon without background. -->
+    <path
+        android:fillColor="#EED1B2"
+        android:pathData="M100.00,79.12 L124.62,79.12 L124.62,113.17 L161.29,79.12 L188.00,79.12 L110.21,161.88 L109.95,89.07 L100.00,89.07 Z" />
+    <path
+        android:pathData="M110.11,176.73 L120.99,176.73 L110.11,192.03 L120.99,192.03 M125.55,192.03 L132.61,176.73 L139.67,192.03 M127.67,187.44 L137.55,187.44 M145.13,192.03 L145.13,176.73 L151.03,176.73 A4.33,4.33 0 0,1 151.03,185.40 L145.13,185.40 M160.82,176.73 L160.82,192.03 L170.15,192.03"
+        android:strokeColor="#EED1B2"
+        android:strokeWidth="1.70"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M174.93,171.12 Q175.50,175.31 179.69,175.88 Q175.50,176.45 174.93,180.64 Q174.36,176.45 170.17,175.88 Q174.36,175.31 174.93,171.12"
+        android:strokeColor="#EED1B2"
+        android:strokeWidth="1.36"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M132.24,201.44 L132.24,208.32 L136.31,208.32 M140.79,208.32 L143.96,201.44 L147.12,208.32 M141.71,206.32 L146.20,206.32 M151.60,208.32 L151.60,201.44 L153.68,201.44 A1.60,1.60 0 0,1 153.68,204.64 L151.60,204.64 M151.60,204.64 L153.92,204.64 A1.84,1.84 0 0,1 153.92,208.32 L151.60,208.32"
+        android:strokeColor="#B3EED1B2"
+        android:strokeWidth="1.12"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>

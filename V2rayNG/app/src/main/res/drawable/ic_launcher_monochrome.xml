@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Monochrome layer of the Zapl Lab adaptive icon for themed icons: the v2rayNG "V" with a small
+     "ZAPL", the spark and the lab flask below. Only alpha is used by the launcher. Generated. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M36.00,31.07 L46.07,31.07 L46.07,45.00 L61.07,31.07 L72.00,31.07 L40.18,64.93 L40.07,35.14 L36.00,35.14 Z" />
+    <path
+        android:pathData="M39.44,70.49 L43.50,70.49 L39.44,76.37 L43.50,76.37 M45.80,76.37 L48.50,70.49 L51.20,76.37 M46.57,74.69 L50.43,74.69 M53.86,76.37 L53.86,70.49 L55.98,70.49 A1.68,1.68 0 0,1 55.98,73.85 L53.86,73.85 M60.32,70.49 L60.32,76.37 L63.75,76.37 M66.76,73.19 L68.37,73.19 M67.09,73.19 L67.09,74.37 L66.02,76.40 Q66.02,76.72 66.34,76.72 L68.79,76.72 Q69.12,76.72 69.12,76.40 L68.05,74.37 L68.05,73.19 M67.05,75.65 L68.09,75.65"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="1.12"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M65.92,67.97 Q66.16,69.69 67.88,69.93 Q66.16,70.16 65.92,71.89 Q65.69,70.16 63.96,69.93 Q65.69,69.69 65.92,67.97"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="0.84"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>

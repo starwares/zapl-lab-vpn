@@ -49,6 +49,7 @@ fun MainTopBar(
 
     AppTopBar(
         title = stringResource(R.string.title_server),
+        subtitle = stringResource(R.string.lab_build_indicator),
         onBackClick = {},
         isLoading = isLoading,
         isSearchActive = showSearch,

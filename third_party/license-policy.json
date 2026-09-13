@@ -1,0 +1,60 @@
+{
+  "comment": "Input of scripts/check_licenses.py. Update it together with THIRD_PARTY_NOTICES.md after reviewing a new or changed component; see docs/licensing-audit.md.",
+  "allowed_licenses": [
+    "Apache-2.0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "MIT",
+    "MPL-2.0"
+  ],
+  "license_names": {
+    "the apache software license, version 2.0": "Apache-2.0",
+    "the apache license, version 2.0": "Apache-2.0",
+    "apache license, version 2.0": "Apache-2.0",
+    "apache 2.0": "Apache-2.0",
+    "apache-2.0": "Apache-2.0",
+    "bsd-3-clause": "BSD-3-Clause",
+    "mit": "MIT",
+    "the mit license": "MIT"
+  },
+  "license_urls": {
+    "opensource.org/licenses/bsd-3-clause": "BSD-3-Clause",
+    "www.apache.org/licenses/license-2.0.txt": "Apache-2.0"
+  },
+  "reviewed_artifacts": {
+    "com.tencent:mmkv-static": {
+      "resolved": false,
+      "note": "POM declares BSD-3-Clause, but libmmkv.so also contains AES/MD5 code under the OpenSSL and SSLeay licenses (MMKV LICENSE.TXT), whose advertising clauses the FSF considers GPL-incompatible. LEGAL REVIEW REQUIRED; see docs/licensing-audit.md."
+    },
+    "com.squareup.okhttp3:okhttp": {
+      "resolved": true,
+      "note": "Apache-2.0 code; bundles the Public Suffix List data under MPL-2.0 (attributed in THIRD_PARTY_NOTICES.md)."
+    },
+    "androidx.camera:camera-core": {
+      "resolved": true,
+      "note": "Apache-2.0 and BSD-3-Clause (libyuv in libimage_processing_util_jni.so); both attributed in THIRD_PARTY_NOTICES.md."
+    }
+  },
+  "manual_components": {
+    "desugar_jdk_libs": {
+      "version": "2.1.5",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "resolved": true
+    },
+    "AndroidLibXrayLite": {
+      "gitlink": "d0c6c4ae1b09c912070c8288bd0dbcc2e492ac29",
+      "license": "LGPL-3.0-only",
+      "resolved": true
+    },
+    "hev-socks5-tunnel": {
+      "gitlink": "64cc609f945253b0e9ebc56317d544268f3c68c1",
+      "license": "MIT",
+      "resolved": true
+    },
+    "libv2ray.aar geo data (geoip.dat, geosite.dat, geoip-only-cn-private.dat)": {
+      "resolved": false,
+      "note": "Bundled Loyalsoldier geo data includes MaxMind GeoLite2 data (GeoLite EULA), a hosts list licensed for non-commercial use only (Dan Pollock) and a list without a known license (Peter Lowe). LEGAL REVIEW REQUIRED; see docs/licensing-audit.md."
+    }
+  }
+}

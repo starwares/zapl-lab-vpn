@@ -137,6 +137,9 @@ object SubscriptionUpdater {
             .setConstraints(
                 Constraints.Builder()
                     .setRequiredNetworkType(NetworkType.CONNECTED)
+                    // Background updates (and the optional server test after them) wait until the
+                    // battery is no longer low; manual updates are not affected.
+                    .setRequiresBatteryNotLow(true)
                     .build()
             )
             .setInputData(workDataOf(KEY_SUB_ID to subId))

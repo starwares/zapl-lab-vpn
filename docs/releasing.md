@@ -89,7 +89,7 @@ checksums are the reference.
 [ ] new dependencies were reviewed (License audit workflow)
 [ ] no proprietary or GPL-incompatible SDK
 [ ] branding does not present the app as official v2rayNG
-[ ] updater points to github.com/starwares/zapl-lab-vpn releases
+[ ] updater disabled (UPDATE_CHECK_ENABLED = false) or pointing to github.com/starwares/zapl-lab-vpn releases; always disabled in store builds
 [ ] signing key not published
 [ ] no secrets in the repository or its history
 [ ] source URL reachable by users (repository is public)

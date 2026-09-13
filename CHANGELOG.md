@@ -32,7 +32,13 @@ Upstream base: v2rayNG commit `173f60a1dabe57e822a56381931be6354f7c7f61` (versio
 - Source code, issue tracker and privacy policy links point to
   <https://github.com/starwares/zapl-lab-vpn>.
 - The in-app update check reads releases of this distribution instead of upstream
-  v2rayNG releases.
+  v2rayNG releases, and is disabled (`UPDATE_CHECK_ENABLED = false`) until those releases
+  are published.
+- "Minimal Trust" visual design: navy and slate palette with green reserved for the
+  connected state, updated typography and shapes; dynamic color is off by default.
+- Main screen: a connection card with the status (tap to test the connection), a start/stop
+  button and the selected profile replaces the bottom status bar and floating button;
+  profiles are shown as cards, with share, edit and delete in the overflow menu.
 - Vietnamese strings no longer name the product "v2rayNG".
 - The bundled open-source licenses page is regenerated from the current dependencies.
 - Core service teardown unregisters its receiver exactly once, so stopping the VPN
@@ -43,3 +49,4 @@ Upstream base: v2rayNG commit `173f60a1dabe57e822a56381931be6354f7c7f61` (versio
 - Upstream promotion link in the navigation drawer.
 - Link to the upstream Telegram channel.
 - Unused Montserrat Thin font.
+- "Check for update" entry in the navigation drawer while the update check is disabled.

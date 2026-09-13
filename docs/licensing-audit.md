@@ -241,7 +241,7 @@ Services, Firebase, аналитики, crash-reporting и рекламных SD
 | Launcher/adaptive/monochrome icon, splash, drawer logo | лого v2rayNG | арт Zapl Lab (см. B3/B4) |
 | About | Source code, Feedback → 2dust; Telegram 2dust; Privacy → `CR.md` upstream | Source code, Feedback → `starwares/zapl-lab-vpn`; «Based on v2rayNG — independent modified distribution, not an official v2rayNG release» → ссылка на upstream; License; Notices; Privacy → `PRIVACY.md` форка; версия с commit |
 | Навигация | пункт Promotion (реклама upstream `9.234456.xyz`) | удалён |
-| Updater | `api.github.com/repos/2dust/v2rayNG/releases` | `api.github.com/repos/starwares/zapl-lab-vpn/releases` |
+| Updater | `api.github.com/repos/2dust/v2rayNG/releases` | `api.github.com/repos/starwares/zapl-lab-vpn/releases`; выключен флагом `UPDATE_CHECK_ENABLED = false` (пункт меню скрыт) до публикации релизов |
 | Имена APK | `v2rayNG_<ver>_<abi>.apk` | `zapl-lab-vpn_<ver>_<abi>.apk` |
 | Файл логов | `v2rayNG_logcat_*` | `zapl-lab_logcat_*` |
 | fastlane | title/описание v2rayNG, Telegram 2dust | Zapl Lab, атрибуция, ссылка на исходники |
@@ -349,7 +349,7 @@ CAN REMAIN PRIVATE (отдельные программы на серверах,
 | RuStore | То же | Описание + About | About | Требуется при обработке персональных данных (проверить текущие правила) | **LEGAL REVIEW REQUIRED**: российское регулирование VPN/анонимайзеров (149-ФЗ ст. 15.8) и рекламы средств обхода блокировок; модерация RuStore; требования к статусу разработчика и самообновлению — проверить по актуальным правилам |
 | Huawei AppGallery | То же | Описание + About | About | Требуется (проверить) | Правила VPN-приложений и документы зависят от региона публикации; самообновление в обход магазина, вероятно, запрещено — проверить по актуальным Review Guidelines (не проверялось) |
 
-Рекомендации: для магазинных сборок — отдельный флейвор или флаг без updater; ссылку на
+Рекомендации: для магазинных сборок держать `UPDATE_CHECK_ENABLED = false` (сейчас выключен для всех сборок); ссылку на
 исходники ставить в описании и в About; `PRIVACY.md` (черновик) — пройти юридическую проверку;
 для Google Play добавить экран prominent disclosure до включения VPN и Usage Access.
 
@@ -364,7 +364,8 @@ CAN REMAIN PRIVATE (отдельные программы на серверах,
 3. Перегенерирован устаревший `open_source_licenses.html`; удалён неиспользуемый шрифт OFL.
 4. applicationId `store.zapl.lab.vpn`, ярлыки, названия флейворов, имена APK, vi-строки,
    fastlane, удалены Promotion и Telegram upstream.
-5. Updater, Source code, Feedback, Privacy → `github.com/starwares/zapl-lab-vpn`.
+5. Updater, Source code, Feedback, Privacy → `github.com/starwares/zapl-lab-vpn`; updater выключен
+   флагом `UPDATE_CHECK_ENABLED` до публикации релизов.
 6. CI: `License audit` (`scripts/check_licenses.py` + policy + проверка актуальности HTML,
    отчёты как artifact); `Build APK`: проверка тега, архив Corresponding Source (с сабмодулями
    и Go vendor, без wintun и старых `.dat`), `build-info.txt`, лицензионный гейт `--release`.
@@ -381,7 +382,7 @@ CAN REMAIN PRIVATE (отдельные программы на серверах,
 | B5 | Создать публичный `starwares/zapl-lab-vpn`, unshallow, push, первый релиз через workflow | владелец репозитория |
 | R1 | Свой keystore и GPG-ключ в GitHub Secrets (`APP_KEYSTORE_*`, `GPG_PRIVATE_KEY`); опубликовать отпечаток GPG в README | владелец |
 | R2 | Юридическая проверка `PRIVACY.md`, отдельные ToS сервиса | юрист |
-| R3 | Для магазинов: сборка без updater, prominent disclosure (Google Play) | разработка |
+| R3 | Для магазинов: `UPDATE_CHECK_ENABLED` оставить `false`; prominent disclosure (Google Play) | разработка |
 
 ## Remaining Risks
 
@@ -463,7 +464,7 @@ Not run:
 [ ] новые зависимости проверены
 [ ] proprietary GPL-incompatible SDK отсутствуют
 [ ] брендинг не выдаёт проект за официальный v2rayNG
-[ ] updater указывает на наши releases
+[ ] updater выключен или указывает на наши releases
 [ ] signing key не опубликован
 [ ] secrets отсутствуют
 [ ] source URL доступен пользователю

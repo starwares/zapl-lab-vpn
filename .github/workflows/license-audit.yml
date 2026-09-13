@@ -1,0 +1,57 @@
+name: License audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  licenses:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v7
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v4
+      with:
+        log-accepted-android-sdk-licenses: false
+        cmdline-tools-version: '14742923'
+        packages: 'platforms;android-37.0 build-tools;37.0.0 platform-tools'
+
+    - name: Setup Java
+      uses: actions/setup-java@v6.0.0
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+
+    - name: Generate dependency license reports
+      run: |
+        cd ${{ github.workspace }}/V2rayNG
+        echo "sdk.dir=${ANDROID_HOME}" > local.properties
+        chmod 755 gradlew
+        ./gradlew licensePlaystoreReleaseReport licenseFdroidReleaseReport
+
+    - name: Check licenses against policy and THIRD_PARTY_NOTICES.md
+      run: |
+        python3 scripts/check_licenses.py \
+          V2rayNG/app/build/reports/licenses/licensePlaystoreReleaseReport.json \
+          V2rayNG/app/build/reports/licenses/licenseFdroidReleaseReport.json
+
+    - name: Check that the bundled license page is up to date
+      run: |
+        # The license plugin rewrites this asset from the resolved dependencies.
+        git diff --exit-code -- V2rayNG/app/src/main/assets/open_source_licenses.html
+
+    - name: Upload license reports
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v7
+      with:
+        name: license-reports
+        path: ${{ github.workspace }}/V2rayNG/app/build/reports/licenses/

@@ -41,6 +41,9 @@ Upstream base: v2rayNG commit `173f60a1dabe57e822a56381931be6354f7c7f61` (versio
   profiles are shown as cards, with share, edit and delete in the overflow menu.
 - Vietnamese strings no longer name the product "v2rayNG".
 - The bundled open-source licenses page is regenerated from the current dependencies.
+- The speed notification no longer starts while the screen is off (for example after a core
+  reload on a network change); it resumes when the screen turns on.
+- Background subscription updates wait until the battery is not low.
 - Core service teardown unregisters its receiver exactly once, so stopping the VPN
   service from `onDestroy` is idempotent.
 

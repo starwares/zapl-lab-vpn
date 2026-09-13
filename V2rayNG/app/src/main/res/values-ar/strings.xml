@@ -288,7 +288,11 @@
     <string name="title_source_code">الكود المصدري</string>
     <string name="title_oss_license">تراخيص المصادر المفتوحة</string>
     <string name="title_translators">المترجمون</string>
-    <string name="title_tg_channel">قناة Telegram</string>
+    <string name="title_upstream_project">مبني على v2rayNG</string>
+    <string name="summary_upstream_project">توزيعة مستقلة معدّلة من مشروع v2rayNG مفتوح المصدر، وليست إصدارًا رسميًا من v2rayNG.</string>
+    <string name="title_license">الترخيص: GNU GPL v3</string>
+    <string name="summary_license">برنامج حر دون أي ضمان. يمكنك إعادة توزيعه وتعديله وفق GNU GPL v3.</string>
+    <string name="title_legal_notices">الإشعارات والمكونات الخارجية</string>
 
     <string name="title_pref_promotion">ترويج</string>
 

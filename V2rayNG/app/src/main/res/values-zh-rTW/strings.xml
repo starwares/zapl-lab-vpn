@@ -288,7 +288,11 @@
     <string name="title_source_code">原始碼</string>
     <string name="title_oss_license">開放原始碼授權</string>
     <string name="title_translators">翻譯貢獻者</string>
-    <string name="title_tg_channel">Telegram 頻道</string>
+    <string name="title_upstream_project">基於 v2rayNG</string>
+    <string name="summary_upstream_project">開源專案 v2rayNG 的獨立修改版本，並非 v2rayNG 官方發行版本。</string>
+    <string name="title_license">授權條款：GNU GPL v3</string>
+    <string name="summary_license">自由軟體，不提供任何擔保。您可以依據 GNU GPL v3 再散布及修改本軟體。</string>
+    <string name="title_legal_notices">聲明與第三方元件</string>
 
     <string name="title_pref_promotion">推廣</string>
 

@@ -1,0 +1,64 @@
+Zapl Lab
+========
+
+Zapl Lab is a modified version of v2rayNG, an Android client for the Xray
+core.
+
+  Upstream project:  v2rayNG
+  Upstream source:   https://github.com/2dust/v2rayNG
+  Upstream authors:  2dust and the v2rayNG contributors
+
+v2rayNG is distributed under the GNU General Public License, version 3.
+Upstream source files carry no per-file copyright notices. Copyright in
+v2rayNG belongs to its respective authors and contributors, as recorded in
+the upstream Git history.
+
+This version contains modifications
+-----------------------------------
+
+This is an independent, modified distribution. It is not an official v2rayNG
+release and is not endorsed by the v2rayNG authors.
+
+  Based on:          v2rayNG commit 173f60a1dabe57e822a56381931be6354f7c7f61
+                     (versionName 2.3.8, committed 2026-09-11)
+  Modified:          2026
+  Modifications:     Copyright (C) 2026 the Zapl Lab contributors, as recorded
+                     in the Git history of this repository
+  Source code:       https://github.com/starwares/zapl-lab-vpn
+
+Major modifications:
+
+- Automatic VPN control: the tunnel is started and stopped depending on the
+  application in the foreground (usage-access based foreground application
+  detection, per-application VPN policies, a monitor service, settings and
+  application policy screens, translations of the new strings).
+- Separate product identity: application name, application ID, launcher icons,
+  splash screen and drawer logo.
+- Attribution and legal notices in the About screen; the GPL-3.0 text and the
+  third-party notices are bundled in the application.
+- Links, issue tracker, privacy policy and the in-app update check point to
+  this distribution instead of the upstream project; the upstream promotion
+  and Telegram links are removed.
+
+The complete list of changes is in CHANGELOG.md and in the Git history.
+
+License
+-------
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License version 3 as published by the Free
+Software Foundation. See LICENSE.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+Third-party components bundled in the application are listed, with their
+licenses and required attributions, in THIRD_PARTY_NOTICES.md.
+
+Trademarks
+----------
+
+"v2rayNG", "Xray", "V2Ray" and other names are used only to describe the origin
+and the technical compatibility of this software. They belong to their
+respective owners.

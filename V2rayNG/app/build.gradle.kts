@@ -5,6 +5,69 @@ plugins {
     id("com.jaredsburrows.license")
 }
 
+// Commit the APK is built from. About shows it so a published binary can be matched to its source
+// revision; builds from a source archive without Git history report "unknown".
+val sourceCommit: String = runCatching {
+    providers.exec {
+        commandLine("git", "rev-parse", "--short=12", "HEAD")
+        isIgnoreExitValue = true
+    }.standardOutput.asText.get().trim()
+}.getOrDefault("").ifEmpty { "unknown" }
+
+/**
+ * Turns the repository's legal texts into WebView pages under assets/legal/, so every APK carries
+ * the GPL-3.0 text and the third-party notices of the exact source revision it was built from.
+ */
+abstract class GenerateLegalAssetsTask : DefaultTask() {
+    @get:InputFile
+    @get:PathSensitive(PathSensitivity.NONE)
+    abstract val licenseFile: RegularFileProperty
+
+    @get:InputFiles
+    @get:PathSensitive(PathSensitivity.NAME_ONLY)
+    abstract val noticeFiles: ConfigurableFileCollection
+
+    @get:InputFiles
+    @get:PathSensitive(PathSensitivity.NAME_ONLY)
+    abstract val licenseTexts: ConfigurableFileCollection
+
+    @get:OutputDirectory
+    abstract val outputDirectory: DirectoryProperty
+
+    @TaskAction
+    fun generate() {
+        val legalDir = outputDirectory.get().dir("legal").asFile
+        legalDir.deleteRecursively()
+        legalDir.mkdirs()
+        legalDir.resolve("license.html").writeText(page(listOf(licenseFile.get().asFile)))
+        legalDir.resolve("notices.html").writeText(
+            page(noticeFiles.files.toList() + licenseTexts.files.sortedBy { it.name })
+        )
+    }
+
+    private fun page(files: List<File>): String = buildString {
+        append("<!DOCTYPE html><html><head><meta charset=\"utf-8\">")
+        append("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">")
+        append("<style>body{margin:0}pre{white-space:pre-wrap;word-wrap:break-word;font-size:12px}")
+        append("h2{font-family:sans-serif;font-size:14px}</style></head><body>")
+        files.forEach { file ->
+            append("<h2>").append(escape(file.name)).append("</h2><pre>")
+            append(escape(file.readText())).append("</pre>")
+        }
+        append("</body></html>")
+    }
+
+    private fun escape(text: String) =
+        text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+}
+
+val generateLegalAssets = tasks.register<GenerateLegalAssetsTask>("generateLegalAssets") {
+    val repositoryRoot = rootProject.layout.projectDirectory.dir("..")
+    licenseFile.set(repositoryRoot.file("LICENSE"))
+    noticeFiles.from(repositoryRoot.file("NOTICE"), repositoryRoot.file("THIRD_PARTY_NOTICES.md"))
+    licenseTexts.from(repositoryRoot.dir("third_party/licenses").asFileTree.matching { include("*.txt") })
+}
+
 android {
     namespace = "com.v2ray.ang"
     compileSdk = 37
@@ -15,6 +78,11 @@ android {
         targetSdk = 37
         versionCode = 748
         versionName = "2.3.8"
+
+        // GitHub owner/name of this distribution: source code offer, issues, privacy policy and the
+        // release channel read by the in-app update check.
+        buildConfigField("String", "SOURCE_REPOSITORY", "\"starwares/zapl-lab-vpn\"")
+        buildConfigField("String", "SOURCE_COMMIT", "\"$sourceCommit\"")
 
         val abiFilterList = (properties["ABI_FILTERS"] as? String)?.split(';')
         splits {
@@ -149,6 +217,15 @@ android {
         }
     }
 
+}
+
+androidComponents {
+    onVariants { variant ->
+        variant.sources.assets?.addGeneratedSourceDirectory(
+            generateLegalAssets,
+            GenerateLegalAssetsTask::outputDirectory
+        )
+    }
 }
 
 dependencies {

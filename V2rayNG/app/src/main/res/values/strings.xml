@@ -288,7 +288,11 @@
     <string name="title_source_code">Source code</string>
     <string name="title_oss_license">Open-source licenses</string>
     <string name="title_translators">Translators</string>
-    <string name="title_tg_channel">Telegram channel</string>
+    <string name="title_upstream_project">Based on v2rayNG</string>
+    <string name="summary_upstream_project">Independent modified distribution of the open-source v2rayNG project. Not an official v2rayNG release.</string>
+    <string name="title_license">License: GNU GPL v3</string>
+    <string name="summary_license">Free software with no warranty. You may redistribute and modify it under the GNU GPL v3.</string>
+    <string name="title_legal_notices">Notices and third-party components</string>
 
     <string name="title_pref_promotion">Promotion</string>
 

@@ -288,7 +288,11 @@
     <string name="title_source_code">کد منبع</string>
     <string name="title_oss_license">مجوز های منبع باز</string>
     <string name="title_translators">مترجمان</string>
-    <string name="title_tg_channel">کانال تلگرام</string>
+    <string name="title_upstream_project">بر پایه v2rayNG</string>
+    <string name="summary_upstream_project">نسخه‌ای مستقل و تغییریافته از پروژه متن‌باز v2rayNG. این نسخه انتشار رسمی v2rayNG نیست.</string>
+    <string name="title_license">مجوز: GNU GPL v3</string>
+    <string name="summary_license">نرم‌افزار آزاد و بدون هیچ ضمانتی. می‌توانید آن را تحت GNU GPL v3 بازتوزیع و تغییر دهید.</string>
+    <string name="title_legal_notices">اطلاعیه‌ها و مؤلفه‌های شخص ثالث</string>
 
     <string name="title_pref_promotion">تبلیغات</string>
 

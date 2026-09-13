@@ -3,6 +3,7 @@ package com.v2ray.ang.ui
 import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebView
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -61,11 +62,12 @@ fun AboutScreen(
     onTranslatorsClick: () -> Unit
 ) {
     val context = LocalContext.current
-    var showOssDialog by remember { mutableStateOf(false) }
+    var openDocument by remember { mutableStateOf<LegalDocument?>(null) }
 
     val libVersion = CoreNativeManager.getLibVersion()
     val versionText = "v${BuildConfig.VERSION_NAME} ($libVersion)"
-    val appIdText = BuildConfig.APPLICATION_ID
+    // The commit ties this binary to its published source revision.
+    val appIdText = "${BuildConfig.APPLICATION_ID} · ${BuildConfig.SOURCE_COMMIT}"
 
     Scaffold(
         contentWindowInsets = WindowInsets(0),
@@ -88,9 +90,26 @@ fun AboutScreen(
                 onClick = { Utils.openUri(context, AppConfig.APP_URL) }
             )
             SettingsMenuItem(
+                icon = painterResource(R.drawable.ic_about_24dp),
+                title = stringResource(R.string.title_upstream_project),
+                subtitle = stringResource(R.string.summary_upstream_project),
+                onClick = { Utils.openUri(context, AppConfig.UPSTREAM_URL) }
+            )
+            SettingsMenuItem(
+                icon = painterResource(R.drawable.license_24px),
+                title = stringResource(R.string.title_license),
+                subtitle = stringResource(R.string.summary_license),
+                onClick = { openDocument = LegalDocument.License }
+            )
+            SettingsMenuItem(
+                icon = painterResource(R.drawable.license_24px),
+                title = stringResource(R.string.title_legal_notices),
+                onClick = { openDocument = LegalDocument.Notices }
+            )
+            SettingsMenuItem(
                 icon = painterResource(R.drawable.license_24px),
                 title = stringResource(R.string.title_oss_license),
-                onClick = { showOssDialog = true }
+                onClick = { openDocument = LegalDocument.OpenSourceLicenses }
             )
             SettingsMenuItem(
                 icon = painterResource(R.drawable.ic_translate_24dp),
@@ -101,11 +120,6 @@ fun AboutScreen(
                 icon = painterResource(R.drawable.ic_feedback_24dp),
                 title = stringResource(R.string.title_pref_feedback),
                 onClick = { Utils.openUri(context, AppConfig.APP_ISSUES_URL) }
-            )
-            SettingsMenuItem(
-                icon = painterResource(R.drawable.ic_telegram_24dp),
-                title = stringResource(R.string.title_tg_channel),
-                onClick = { Utils.openUri(context, AppConfig.TG_CHANNEL_URL) }
             )
             SettingsMenuItem(
                 icon = painterResource(R.drawable.ic_privacy_24dp),
@@ -120,15 +134,15 @@ fun AboutScreen(
         }
     }
 
-    if (showOssDialog) {
+    openDocument?.let { document ->
         AlertDialog(
-            onDismissRequest = { showOssDialog = false },
-            title = { Text(stringResource(R.string.title_oss_license)) },
+            onDismissRequest = { openDocument = null },
+            title = { Text(stringResource(document.titleRes)) },
             text = {
                 AndroidView(
                     factory = { ctx ->
                         WebView(ctx).apply {
-                            loadUrl("file:///android_asset/open_source_licenses.html")
+                            loadUrl(document.assetUrl)
                         }
                     },
                     modifier = Modifier
@@ -137,7 +151,7 @@ fun AboutScreen(
                 )
             },
             confirmButton = {
-                TextButton(onClick = { showOssDialog = false }) {
+                TextButton(onClick = { openDocument = null }) {
                     Text(stringResource(R.string.action_ok))
                 }
             },
@@ -145,4 +159,15 @@ fun AboutScreen(
             modifier = Modifier.padding(bottom = 60.dp)
         )
     }
+}
+
+/**
+ * Legal texts bundled in the APK. The `legal/` pages are generated at build time from the
+ * repository's LICENSE, NOTICE and THIRD_PARTY_NOTICES.md, so the binary carries the same notices
+ * as its source revision.
+ */
+private enum class LegalDocument(@StringRes val titleRes: Int, val assetUrl: String) {
+    License(R.string.title_license, "file:///android_asset/legal/license.html"),
+    Notices(R.string.title_legal_notices, "file:///android_asset/legal/notices.html"),
+    OpenSourceLicenses(R.string.title_oss_license, "file:///android_asset/open_source_licenses.html")
 }

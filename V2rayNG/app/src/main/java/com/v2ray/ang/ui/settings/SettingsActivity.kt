@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -42,6 +43,7 @@ import com.v2ray.ang.handler.MmkvManager.rememberMmkvString
 import com.v2ray.ang.handler.SettingsChangeManager
 import com.v2ray.ang.root.RootManager
 import com.v2ray.ang.ui.base.BaseComponentActivity
+import com.v2ray.ang.ui.autovpn.AutoVpnActivity
 import com.v2ray.ang.ui.compose.AppTopBar
 import com.v2ray.ang.ui.compose.CollapsiblePreferenceGroupHeader
 import com.v2ray.ang.ui.compose.NavigationBarsSpacer
@@ -103,6 +105,7 @@ fun SettingsScreen(
     onSystemVpnSettingsClicked: () -> Unit
 ) {
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
     val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
     val systemVpnSettingsAvailable by viewModel.systemVpnSettingsAvailable.collectAsStateWithLifecycle()
     var uiSettingsExpanded by rememberSaveable { mutableStateOf(true) }
@@ -638,6 +641,11 @@ fun SettingsScreen(
                 onExpandedChange = { advancedSettingsExpanded = it }
             )
             if (advancedSettingsExpanded) {
+                SettingsMenuItem(
+                    title = stringResource(R.string.auto_vpn_title),
+                    subtitle = stringResource(R.string.auto_vpn_summary),
+                    onClick = { context.startActivity(Intent(context, AutoVpnActivity::class.java)) }
+                )
                 SettingsSwitchItem(
                     title = stringResource(R.string.title_pref_is_booted),
                     summary = stringResource(R.string.summary_pref_is_booted),

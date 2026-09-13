@@ -8,6 +8,7 @@ import com.v2ray.ang.AppConfig
 import com.v2ray.ang.core.LauncherManager
 import com.v2ray.ang.handler.MmkvManager
 import com.v2ray.ang.handler.SubscriptionUpdater
+import com.v2ray.ang.service.AutoVpnMonitorService
 import com.v2ray.ang.util.LogUtil
 
 class BootReceiver : BroadcastReceiver() {
@@ -44,6 +45,10 @@ class BootReceiver : BroadcastReceiver() {
                 return
             }
         }
+
+        // Auto VPN only restores its monitor; it never raises the tunnel on its own, so the
+        // device comes back with the VPN off until the user really opens a "through VPN" app.
+        AutoVpnMonitorService.syncWithSettings(context)
 
         if (!MmkvManager.decodeStartOnBoot()) {
             LogUtil.i(AppConfig.TAG, "BootReceiver: Auto-start on boot is disabled")

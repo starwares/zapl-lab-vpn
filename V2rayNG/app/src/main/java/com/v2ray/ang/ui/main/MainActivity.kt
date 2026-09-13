@@ -24,6 +24,7 @@ import com.v2ray.ang.handler.AngConfigManager
 import com.v2ray.ang.handler.MmkvManager
 import com.v2ray.ang.handler.SettingsChangeManager
 import com.v2ray.ang.handler.SettingsManager
+import com.v2ray.ang.service.AutoVpnMonitorService
 import com.v2ray.ang.ui.AboutActivity
 import com.v2ray.ang.ui.backup.BackupActivity
 import com.v2ray.ang.ui.base.HelperBaseComponentActivity
@@ -95,6 +96,14 @@ class MainActivity : HelperBaseComponentActivity() {
         mainViewModel.onAction(MainAction.Initialize)
 
         checkAndRequestPermission(PermissionType.POST_NOTIFICATIONS) {}
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // The Auto VPN monitor can be killed by the system or an OEM battery manager, and usage
+        // access can be revoked while the app is away. Reconciling it here is allowed because a
+        // visible activity may start a foreground service; it is a no-op when already running.
+        AutoVpnMonitorService.syncWithSettings(this)
     }
 
     @Composable

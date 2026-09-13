@@ -36,7 +36,11 @@ object LauncherManager {
         return true
     }
 
-    fun startService(context: Context, guid: String? = null) {
+    /**
+     * @param notifyUser false for automatic starts that are not a user gesture, so a policy
+     *   driven start does not raise a toast or overwrite the clipboard on every app switch.
+     */
+    fun startService(context: Context, guid: String? = null, notifyUser: Boolean = true) {
         LogUtil.i(AppConfig.TAG, "LauncherManager: startService from ${context::class.java.simpleName}")
 
         if (guid != null) {
@@ -44,10 +48,12 @@ object LauncherManager {
         }
 
         try {
-            startContextService(context)
+            startContextService(context, notifyUser)
         } catch (e: Exception) {
             LogUtil.e(AppConfig.TAG, "LauncherManager: ${e.message}", e)
-            context.toast(e.message ?: e.javaClass.simpleName)
+            if (notifyUser) {
+                context.toast(e.message ?: e.javaClass.simpleName)
+            }
         }
     }
 
@@ -69,7 +75,7 @@ object LauncherManager {
     }
 
     @Throws(Exception::class)
-    private fun startContextService(context: Context) {
+    private fun startContextService(context: Context, notifyUser: Boolean = true) {
         // Note: isRunning check is removed here to avoid loading Native libraries in the UI process.
         // The check is performed in CoreServiceManager when the service starts in the daemon process.
 
@@ -95,15 +101,17 @@ object LauncherManager {
 
         SettingsManager.refreshRuntimeSocksPort()
 
-        if (config.insecure == true && config.pinnedCA256.isNullOrEmpty()) {
+        if (notifyUser && config.insecure == true && config.pinnedCA256.isNullOrEmpty()) {
             context.toastError(R.string.toast_allow_insecure_deprecated)
             Utils.setClipboard(context, context.getString(R.string.toast_allow_insecure_deprecated))
         }
 
-        if (MmkvManager.decodeSettingsBool(AppConfig.PREF_PROXY_SHARING)) {
-            context.toast(R.string.toast_warning_pref_proxysharing_short)
-        } else {
-            context.toast(R.string.toast_services_start)
+        if (notifyUser) {
+            if (MmkvManager.decodeSettingsBool(AppConfig.PREF_PROXY_SHARING)) {
+                context.toast(R.string.toast_warning_pref_proxysharing_short)
+            } else {
+                context.toast(R.string.toast_services_start)
+            }
         }
 
         val isRootMode = SettingsManager.isRootMode()

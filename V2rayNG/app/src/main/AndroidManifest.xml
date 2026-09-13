@@ -40,6 +40,14 @@
     <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!--
+        Auto VPN reads which app is on screen. The permission is not granted by a runtime
+        dialog: declaring it only makes the app appear in Settings > Usage access, where the
+        user turns it on. Without the declaration the app is not listed there at all.
+    -->
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:name=".AngApplication"
@@ -123,6 +131,12 @@
             android:name=".ui.server.ServerProxyChainActivity"
             android:exported="false"
             android:windowSoftInputMode="stateUnchanged|adjustResize" />
+        <activity
+            android:name=".ui.autovpn.AutoVpnActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.autovpn.AutoVpnAppsActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:exported="false" />
@@ -235,6 +249,17 @@
         </service>
 
         <service
+            android:name=".service.AutoVpnMonitorService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse"
+            android:label="@string/auto_vpn_title"
+            android:process=":daemon">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="auto_vpn_foreground_app_monitor" />
+        </service>
+
+        <service
             android:name=".service.CoreProxyOnlyService"
             android:exported="false"
             android:foregroundServiceType="specialUse"
@@ -289,6 +314,15 @@
                 <action android:name="${applicationId}.action.activity" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".receiver.AutoVpnCommandReceiver"
+            android:exported="false"
+            android:process=":daemon">
+            <intent-filter>
+                <action android:name="${applicationId}.action.service" />
+            </intent-filter>
+        </receiver>
+
         <receiver
             android:name=".receiver.BootReceiver"
             android:exported="true"

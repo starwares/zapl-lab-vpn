@@ -57,6 +57,13 @@ object CoreServiceManager {
     @Volatile
     private var isReloading = false
 
+    /**
+     * Teardown can now be reached both from `stopAllService()` and from `onDestroy()` after a
+     * bare `stopService()`, so the receiver must be unregistered exactly once.
+     */
+    @Volatile
+    private var isMessageReceiverRegistered = false
+
     /** Tun descriptor the core was started with, null in the proxy only and root run modes. */
     private var currentVpnInterface: ParcelFileDescriptor? = null
 
@@ -119,6 +126,7 @@ object CoreServiceManager {
         mFilter.addAction(Intent.ACTION_SCREEN_OFF)
         mFilter.addAction(Intent.ACTION_USER_PRESENT)
         ContextCompat.registerReceiver(service, mMsgReceive, mFilter, Utils.receiverFlags())
+        isMessageReceiverRegistered = true
 
         currentVpnInterface = vpnInterface
         launchCore(service, vpnInterface)
@@ -217,10 +225,13 @@ object CoreServiceManager {
         MessageHelper.sendMsg2UI(service, AppConfig.MSG_STATE_STOP_SUCCESS, "")
         NotificationManager.cancelNotification()
 
-        try {
-            service.unregisterReceiver(mMsgReceive)
-        } catch (e: Exception) {
-            LogUtil.e(AppConfig.TAG, "StartCore-Manager: Failed to unregister receiver", e)
+        if (isMessageReceiverRegistered) {
+            isMessageReceiverRegistered = false
+            try {
+                service.unregisterReceiver(mMsgReceive)
+            } catch (e: Exception) {
+                LogUtil.e(AppConfig.TAG, "StartCore-Manager: Failed to unregister receiver", e)
+            }
         }
 
         return true

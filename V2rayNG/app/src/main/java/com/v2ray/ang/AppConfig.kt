@@ -24,6 +24,11 @@ object AppConfig {
     const val PREF_ROUTE_ONLY_ENABLED = "pref_route_only_enabled"
     const val PREF_PER_APP_PROXY = "pref_per_app_proxy"
     const val PREF_PER_APP_PROXY_SET = "pref_per_app_proxy_set"
+    const val PREF_AUTO_VPN_ENABLED = "pref_auto_vpn_enabled"
+    const val PREF_AUTO_VPN_IDLE_TIMEOUT_MS = "pref_auto_vpn_idle_timeout_ms"
+    const val PREF_AUTO_VPN_KEEP_SCREEN_OFF = "pref_auto_vpn_keep_screen_off"
+    const val PREF_AUTO_VPN_POLICIES = "pref_auto_vpn_policies"
+    const val PREF_AUTO_VPN_STATUS = "pref_auto_vpn_status"
     const val PREF_BYPASS_APPS = "pref_bypass_apps"
     const val PREF_LOCAL_DNS_ENABLED = "pref_local_dns_enabled"
     const val PREF_FAKE_DNS_ENABLED = "pref_fake_dns_enabled"
@@ -197,6 +202,10 @@ object AppConfig {
 
     const val MSG_SUB_UPDATE_START = 8
     const val MSG_SUB_UPDATE_CANCEL = 81
+
+    /** Auto VPN service commands; 9x is free, the 6x range already belongs to delay measuring. */
+    const val MSG_AUTO_VPN_STOP = 9
+    const val MSG_AUTO_VPN_RELOAD = 91
 
     /** Notification channel IDs and names. */
     // Use a new ID because Android does not let an app raise an existing channel's importance.

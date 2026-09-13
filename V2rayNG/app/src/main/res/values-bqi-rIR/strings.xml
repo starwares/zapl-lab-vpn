@@ -557,4 +557,44 @@
     <string name="connection_test_empty_message">دووسمندی نؽ</string>
     <string name="value_unknown">نا مؽخص</string>
 
+    <!--
+        Auto VPN strings are not translated into Bakhtiari yet. The English source text
+        is kept here so the keys exist for every declared locale; replace each value as
+        soon as a translation is available.
+    -->
+    <string name="auto_vpn_title">Automatic VPN control</string>
+    <string name="auto_vpn_summary">Turns the VPN on and off depending on the app on screen</string>
+    <string name="auto_vpn_switch">Control by active app</string>
+    <string name="auto_vpn_switch_summary">The decision follows the app you are actually using</string>
+    <string name="auto_vpn_notification_text">Detecting the active app</string>
+    <string name="auto_vpn_permission_title">Usage access</string>
+    <string name="auto_vpn_permission_message">To switch the VPN automatically the app has to detect which app is currently open on screen. Android allows this only after usage access is granted.</string>
+    <string name="auto_vpn_permission_action">Open Android settings</string>
+    <string name="auto_vpn_policy_vpn">Through VPN</string>
+    <string name="auto_vpn_policy_direct">Without VPN</string>
+    <string name="auto_vpn_policy_direct_summary">All other apps</string>
+    <string name="auto_vpn_policy_forbidden">Always turn VPN off</string>
+    <string name="auto_vpn_policy_question">How should this app use the network?</string>
+    <string name="auto_vpn_apps_count">Apps: %1$d</string>
+    <string name="auto_vpn_behavior">Behavior</string>
+    <string name="auto_vpn_idle_timeout">Turn-off delay</string>
+    <string name="auto_vpn_seconds">%1$d s</string>
+    <string name="auto_vpn_immediately">Immediately</string>
+    <string name="auto_vpn_keep_screen_off">Keep VPN on while the screen is off</string>
+    <string name="auto_vpn_keep_screen_off_summary">The turn-off delay does not start while the screen is locked</string>
+    <string name="auto_vpn_status">Status</string>
+    <string name="auto_vpn_status_vpn">VPN: %1$s</string>
+    <string name="auto_vpn_status_app">Active app: %1$s</string>
+    <string name="auto_vpn_status_mode">Mode: %1$s</string>
+    <string name="auto_vpn_status_none">not detected</string>
+    <string name="auto_vpn_state_off">off</string>
+    <string name="auto_vpn_state_starting">starting</string>
+    <string name="auto_vpn_state_on">on</string>
+    <string name="auto_vpn_state_stopping">stopping</string>
+    <string name="auto_vpn_state_error">error</string>
+    <string name="auto_vpn_apps_title">Apps</string>
+    <string name="auto_vpn_filter_all">All</string>
+    <string name="auto_vpn_filter_forbidden">Turn VPN off</string>
+    <string name="auto_vpn_requires_vpn_mode">Works in VPN mode only: local proxy mode creates no tunnel</string>
+    <string name="auto_vpn_apps_empty">No apps match the filter</string>
 </resources>

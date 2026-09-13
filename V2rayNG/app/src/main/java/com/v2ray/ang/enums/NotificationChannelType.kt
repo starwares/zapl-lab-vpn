@@ -18,5 +18,10 @@ enum class NotificationChannelType(
         channelId = "core_test_channel",
         channelName = "Core Test Service",
         notificationId = 12
+    ),
+    AUTO_VPN_MONITOR(
+        channelId = "auto_vpn_monitor_channel",
+        channelName = "Auto VPN Monitor",
+        notificationId = 14
     )
 }

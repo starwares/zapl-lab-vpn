@@ -53,6 +53,10 @@ class CoreVpnService : VpnService(), ServiceControl {
 //    }
 
     override fun onDestroy() {
+        // A bare stopService() or a task kill skips stopAllService(), so the native core and
+        // its receiver would outlive the tunnel. Every step of stopCoreLoop() is guarded
+        // against a second run, so repeating it after the normal stop path is harmless.
+        CoreServiceManager.stopCoreLoop()
         super.onDestroy()
         LogUtil.i(AppConfig.TAG, "StartCore-VPN: Service destroyed")
 

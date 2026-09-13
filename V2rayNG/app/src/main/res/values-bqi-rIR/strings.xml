@@ -25,7 +25,6 @@
     <string name="toast_services_failure">ره وستن سرویس وا مووفقیت ٱنجوم نوابی</string>
 
     <!--ServerActivity-->
-    <string name="title_server">فایل کانفیگ</string>
     <string name="menu_item_add_config">ٱووردن کانفیگ</string>
     <string name="menu_item_save_config">زفت کردن کانفیگ</string>
     <string name="menu_item_edit_config">آلشتکاری کانفیگ</string>
@@ -604,4 +603,11 @@
     <string name="auto_vpn_filter_forbidden">Turn VPN off</string>
     <string name="auto_vpn_requires_vpn_mode">Works in VPN mode only: local proxy mode creates no tunnel</string>
     <string name="auto_vpn_apps_empty">No apps match the filter</string>
+
+    <!--
+        Main screen connection card strings are not translated into Bakhtiari yet; the English
+        source text keeps the keys present for every declared locale.
+    -->
+    <string name="main_no_server_selected">No profile selected</string>
+    <string name="action_check_connection">Check connection</string>
 </resources>

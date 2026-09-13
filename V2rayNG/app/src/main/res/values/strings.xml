@@ -25,7 +25,6 @@
     <string name="toast_services_failure">Failed to start service</string>
 
     <!--ServerActivity-->
-    <string name="title_server">Config</string>
     <string name="menu_item_add_config">Add config</string>
     <string name="menu_item_save_config">Save config</string>
     <string name="menu_item_edit_config">Edit config</string>
@@ -595,4 +594,7 @@
     <string name="auto_vpn_filter_forbidden">Turn VPN off</string>
     <string name="auto_vpn_requires_vpn_mode">Works in VPN mode only: local proxy mode creates no tunnel</string>
     <string name="auto_vpn_apps_empty">No apps match the filter</string>
+
+    <string name="main_no_server_selected">No profile selected</string>
+    <string name="action_check_connection">Check connection</string>
 </resources>

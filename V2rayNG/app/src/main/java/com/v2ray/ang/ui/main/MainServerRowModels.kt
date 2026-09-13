@@ -1,6 +1,7 @@
 package com.v2ray.ang.ui.main
 
 import com.v2ray.ang.dto.entities.ProfileItem
+import com.v2ray.ang.dto.entities.ServerAffiliationInfo
 import com.v2ray.ang.dto.entities.ServersCache
 import com.v2ray.ang.extension.isComplexType
 import com.v2ray.ang.extension.nullIfBlank
@@ -35,6 +36,23 @@ internal fun buildServerRowUiModel(
         typeDescription = serverProtocolDescription(profile),
         testDelayMillis = server.testDelayMillis,
         subscriptionBadge = subscriptionRemarks.firstOrNull()?.toString().orEmpty(),
+    )
+}
+
+/** Returns null when nothing is selected or the selected profile no longer exists. */
+internal fun buildSelectedServerUiModel(
+    guid: String?,
+    profile: ProfileItem?,
+    affiliation: ServerAffiliationInfo?,
+): ServerRowUiModel? {
+    if (guid.isNullOrEmpty() || profile == null) return null
+    return buildServerRowUiModel(
+        server = ServersCache(
+            guid = guid,
+            profile = profile,
+            testDelayMillis = affiliation?.testDelayMillis ?: 0L
+        ),
+        subscriptionRemarks = "",
     )
 }
 

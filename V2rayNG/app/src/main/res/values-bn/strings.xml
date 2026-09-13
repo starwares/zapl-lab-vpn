@@ -25,7 +25,6 @@
     <string name="toast_services_failure">সার্ভিস শুরু হতে ব্যর্থ হয়েছে</string>
 
     <!--ServerActivity-->
-    <string name="title_server">কনফিগারেশন ফাইল</string>
     <string name="menu_item_add_config">কনফিগারেশন যোগ করুন</string>
     <string name="menu_item_save_config">কনফিগারেশন সংরক্ষণ করুন</string>
     <string name="menu_item_edit_config">কনফিগারেশন সম্পাদনা করুন</string>
@@ -595,4 +594,7 @@
     <string name="auto_vpn_filter_forbidden">VPN বন্ধ করে</string>
     <string name="auto_vpn_requires_vpn_mode">শুধু VPN মোডে কাজ করে: লোকাল প্রক্সি মোডে কোনো টানেল তৈরি হয় না</string>
     <string name="auto_vpn_apps_empty">এই ফিল্টারে কোনো অ্যাপ নেই</string>
+
+    <string name="main_no_server_selected">কোনো কনফিগারেশন নির্বাচিত নয়</string>
+    <string name="action_check_connection">সংযোগ পরীক্ষা করুন</string>
 </resources>

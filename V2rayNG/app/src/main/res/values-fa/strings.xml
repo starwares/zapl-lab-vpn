@@ -25,7 +25,6 @@
     <string name="toast_services_failure">شروع سرویس با شکست مواجه شد</string>
 
     <!--ServerActivity-->
-    <string name="title_server">فایل کانفیگ</string>
     <string name="menu_item_add_config">افزودن کانفیگ</string>
     <string name="menu_item_save_config">ذخیره کانفیگ</string>
     <string name="menu_item_edit_config">ویرایش کردن کانفیگ</string>
@@ -595,4 +594,7 @@
     <string name="auto_vpn_filter_forbidden">VPN را خاموش می‌کنند</string>
     <string name="auto_vpn_requires_vpn_mode">فقط در حالت VPN کار می‌کند: حالت پراکسی محلی تونل نمی‌سازد</string>
     <string name="auto_vpn_apps_empty">برنامه‌ای با این فیلتر یافت نشد</string>
+
+    <string name="main_no_server_selected">هیچ کانفیگی انتخاب نشده است</string>
+    <string name="action_check_connection">بررسی اتصال</string>
 </resources>

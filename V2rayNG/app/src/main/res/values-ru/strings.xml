@@ -25,7 +25,6 @@
     <string name="toast_services_failure">Сбой при запуске служб</string>
 
     <!--ServerActivity-->
-    <string name="title_server">Профиль</string>
     <string name="menu_item_add_config">Добавить профиль</string>
     <string name="menu_item_save_config">Сохранить профиль</string>
     <string name="menu_item_edit_config">Изменить профиль</string>
@@ -599,4 +598,7 @@
     <string name="auto_vpn_filter_forbidden">Отключают VPN</string>
     <string name="auto_vpn_requires_vpn_mode">Работает только в режиме VPN: в режиме локального прокси туннель не создаётся</string>
     <string name="auto_vpn_apps_empty">Нет приложений по этому фильтру</string>
+
+    <string name="main_no_server_selected">Профиль не выбран</string>
+    <string name="action_check_connection">Проверить соединение</string>
 </resources>

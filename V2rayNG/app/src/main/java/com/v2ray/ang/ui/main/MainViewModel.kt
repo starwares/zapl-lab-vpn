@@ -60,6 +60,11 @@ class MainViewModel(
     )
     val uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
 
+    /** Summary of the selected profile for the connection card; it may belong to any group. */
+    private val _selectedServer = MutableStateFlow<ServerRowUiModel?>(null)
+    internal val selectedServer: StateFlow<ServerRowUiModel?> = _selectedServer.asStateFlow()
+    private var selectedServerJob: Job? = null
+
     // ---------- Keyword filtering ----------
     @Volatile
     private var keywordFilter: String = ""
@@ -123,6 +128,7 @@ class MainViewModel(
                     val gid = request.groupId
                     cacheMutex.withLock { groupDataCache.remove(gid) }
                     updateGroupUi(gid, loadGroup(gid, forceRefresh = true))
+                    refreshSelectedServer()
                 }
             }
 
@@ -396,6 +402,7 @@ class MainViewModel(
                         selectedGuid = dataSource.getSelectServer(),
                     )
                 }
+                refreshSelectedServer()
                 groups.forEach { mutableServerGroupState(it.id) }
 
                 if (groups.isEmpty()) {
@@ -699,10 +706,31 @@ class MainViewModel(
     fun updateSelectedGuid(guid: String) {
         dataSource.setSelectServer(guid)
         _uiState.update { it.copy(selectedGuid = guid) }
+        refreshSelectedServer()
     }
 
     fun refreshSelectedGuid() {
         _uiState.update { it.copy(selectedGuid = dataSource.getSelectServer()) }
+        refreshSelectedServer()
+    }
+
+    private fun refreshSelectedServer() {
+        selectedServerJob?.cancel()
+        selectedServerJob = viewModelScope.launch(ioDispatcher) {
+            try {
+                val guid = dataSource.getSelectServer()
+                _selectedServer.value = buildSelectedServerUiModel(
+                    guid = guid,
+                    profile = guid?.let { dataSource.decodeServerConfig(it) },
+                    affiliation = guid?.let { dataSource.decodeAffiliationInfo(it) },
+                )
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (error: Exception) {
+                LogUtil.e(AppConfig.TAG, "Failed to load the selected profile summary", error)
+                _selectedServer.value = null
+            }
+        }
     }
 
     fun removeServerAndRefresh(guid: String) {
@@ -811,6 +839,7 @@ class MainViewModel(
         viewModelScope.launch(ioDispatcher) {
             cacheMutex.withLock { groupDataCache.clear() }
             reloadAllGroups(_uiState.value.groups.map { it.id })
+            refreshSelectedServer()
         }
     }
 
@@ -854,6 +883,7 @@ class MainViewModel(
         selectedGroupLoadJob?.cancel()
         reloadJob?.cancel()
         filterJob?.cancel()
+        selectedServerJob?.cancel()
         cancelAllPing()
         dataSource.close()
         super.onCleared()

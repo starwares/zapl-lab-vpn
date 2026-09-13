@@ -25,7 +25,6 @@
     <string name="toast_services_failure">فشل بدء الخدمات</string>
 
     <!--ServerActivity-->
-    <string name="title_server">ملف التكوين</string>
     <string name="menu_item_add_config">إضافة تكوين</string>
     <string name="menu_item_save_config">حفظ التكوين</string>
     <string name="menu_item_edit_config">تعديل التكوين</string>
@@ -603,4 +602,7 @@
     <string name="auto_vpn_filter_forbidden">توقف VPN</string>
     <string name="auto_vpn_requires_vpn_mode">يعمل في وضع VPN فقط: وضع الوكيل المحلي لا ينشئ نفقًا</string>
     <string name="auto_vpn_apps_empty">لا توجد تطبيقات تطابق عامل التصفية</string>
+
+    <string name="main_no_server_selected">لم يتم اختيار ملف تكوين</string>
+    <string name="action_check_connection">فحص الاتصال</string>
 </resources>

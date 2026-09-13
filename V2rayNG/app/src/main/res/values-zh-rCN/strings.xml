@@ -25,7 +25,6 @@
     <string name="toast_services_failure">启动服务失败</string>
 
     <!--ServerActivity-->
-    <string name="title_server">配置项</string>
     <string name="menu_item_add_config">添加配置</string>
     <string name="menu_item_save_config">保存配置</string>
     <string name="menu_item_edit_config">编辑配置</string>
@@ -593,4 +592,7 @@
     <string name="auto_vpn_filter_forbidden">关闭 VPN</string>
     <string name="auto_vpn_requires_vpn_mode">仅在 VPN 模式下有效：本地代理模式不会创建隧道</string>
     <string name="auto_vpn_apps_empty">没有符合筛选条件的应用</string>
+
+    <string name="main_no_server_selected">未选择配置项</string>
+    <string name="action_check_connection">检查连接</string>
 </resources>

@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
+import android.os.PowerManager
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.v2ray.ang.AppConfig
@@ -22,6 +23,8 @@ import com.v2ray.ang.util.LogUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlin.math.min
@@ -37,6 +40,9 @@ object NotificationManager {
     private var lastQueryTime = 0L
     private var mBuilder: NotificationCompat.Builder? = null
     private var speedNotificationJob: Job? = null
+
+    /** Owner of the speed query loop; its children are cancelled when the notification is removed. */
+    private val speedNotificationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private var mNotificationManager: NotificationManager? = null
 
     /**
@@ -44,12 +50,18 @@ object NotificationManager {
      * @param currentConfig The current profile configuration.
      */
     fun startSpeedNotification() {
-        if (MmkvManager.decodeSettingsBool(AppConfig.PREF_SPEED_ENABLED) != true) return
-        if (speedNotificationJob != null || CoreServiceManager.isRunning() == false) return
+        val service = getService() ?: return
+        val shouldStart = shouldStartSpeedNotification(
+            speedEnabled = MmkvManager.decodeSettingsBool(AppConfig.PREF_SPEED_ENABLED) == true,
+            loopActive = speedNotificationJob != null,
+            isInteractive = { service.getSystemService(PowerManager::class.java)?.isInteractive != false },
+            isCoreRunning = { CoreServiceManager.isRunning() }
+        )
+        if (!shouldStart) return
 
         var lastZeroSpeed = false
 
-        speedNotificationJob = CoroutineScope(Dispatchers.IO).launch {
+        speedNotificationJob = speedNotificationScope.launch {
             while (isActive) {
                 lastZeroSpeed = updateSpeedNotificationOnce(lastZeroSpeed)
                 delay(QUERY_INTERVAL_MS)
@@ -134,7 +146,7 @@ object NotificationManager {
         service.stopForeground(Service.STOP_FOREGROUND_REMOVE)
 
         mBuilder = null
-        speedNotificationJob?.cancel()
+        speedNotificationScope.coroutineContext.cancelChildren()
         speedNotificationJob = null
         mNotificationManager = null
     }
@@ -288,3 +300,17 @@ object NotificationManager {
         return CoreServiceManager.serviceControl?.get()?.getService()
     }
 }
+
+/**
+ * Decides whether the speed query loop may start. It only refreshes a notification the user can
+ * see, so it does not start while the screen is off: a core reload after a network handover or a
+ * start without a screen would otherwise poll and repost every few seconds until the next
+ * ACTION_SCREEN_OFF. ACTION_SCREEN_ON starts it again. The lambdas keep the binder and native
+ * checks lazy.
+ */
+internal fun shouldStartSpeedNotification(
+    speedEnabled: Boolean,
+    loopActive: Boolean,
+    isInteractive: () -> Boolean,
+    isCoreRunning: () -> Boolean
+): Boolean = speedEnabled && !loopActive && isInteractive() && isCoreRunning()
